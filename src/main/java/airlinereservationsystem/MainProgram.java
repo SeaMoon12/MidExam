@@ -8,6 +8,9 @@ public class MainProgram {
         Scanner scanner = new Scanner(System.in);
         ReservationSystem reservationSystem = new ReservationSystem();
 
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
         System.out.println("=== WELCOME TO AIRLINE TICKET RESERVATION SYSTEM ===");
 
         // Display available flights
@@ -40,6 +43,9 @@ public class MainProgram {
 
         // Display receipt
         reservationSystem.printReceipt(flightId, numOfTickets, flightClass, paymentMethod);
+
+        // Display Thank you
+        System.out.println("Thank you for booking. Have a nice flight, " + name);
 
         scanner.close();
     }
