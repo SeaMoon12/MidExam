@@ -6,9 +6,9 @@ public class Transaction {
     String destination;
     int ticketQuantity;
     String flightClass;
-    int totalPayment;
+    double totalPayment;
 
-    public Transaction(String name, String airline, String destination, int ticketQuantity, String flightClass, int totalPayment) {
+    public Transaction(String name, String airline, String destination, int ticketQuantity, String flightClass, double totalPayment) {
         this.name = name;
         this.airline = airline;
         this.destination = destination;

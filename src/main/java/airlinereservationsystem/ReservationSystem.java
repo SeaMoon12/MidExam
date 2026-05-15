@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class ReservationSystem {
     private Flight[] availableFlights;
     private ArrayList<Transaction> transactions = new ArrayList<>();
+    private double discount = 0;
+    private double vat = 0;
 
     public ReservationSystem() {
         availableFlights = new Flight[] {
@@ -30,20 +32,24 @@ public class ReservationSystem {
         double BUSINESS_MULTIPLIER = 1.25;
         double FIRST_CLASS_MULTIPLIER = 1.5;
         double econDiscount = 0.1;
+        totalPrice = selectedFlight.getPricePerTicket() * numOfTickets;
         switch(flightClass) {
             case 1:
-                totalPrice = selectedFlight.getPricePerTicket() * ECONOMY_MULTIPLIER * numOfTickets;
+                totalPrice = totalPrice * ECONOMY_MULTIPLIER;
                 if (numOfTickets > 5) {
-                    totalPrice -= totalPrice * econDiscount; // Apply 10% discount for economy class if more than 5 tickets
+                    discount = totalPrice * econDiscount;
                 }
                 break;
             case 2:
-                totalPrice = selectedFlight.getPricePerTicket() * BUSINESS_MULTIPLIER * numOfTickets;
+                totalPrice = totalPrice * BUSINESS_MULTIPLIER;
                 break;
             case 3:
-                totalPrice = selectedFlight.getPricePerTicket() * FIRST_CLASS_MULTIPLIER * numOfTickets;
+                totalPrice = totalPrice * FIRST_CLASS_MULTIPLIER;
                 break;
         }
+        vat = 0.11 * totalPrice;
+        totalPrice += vat; // apply VAT
+        totalPrice -= discount; // apply discount
         return totalPrice;
     }
 
@@ -53,9 +59,13 @@ public class ReservationSystem {
         System.out.println("\n=== RECEIPT ===");
         System.out.println("Flight: " + selectedFlight.getFlightDetails());
         System.out.println("Number of Tickets: " + numOfTickets);
+        System.out.println("VAT: " + vat);
+        System.out.println("Discount: " + "- " + discount);
         System.out.println("Total Price: $" + totalPrice);
         System.out.println("Payment Method: " + getPaymentMethod(paymentMethod));
-        transactions.add(new Transaction(name, selectedFlight.getFlightName(), selectedFlight.destination, numOfTickets, getFlightClass(flightClass), (int) totalPrice));
+        transactions.add(new Transaction(name, selectedFlight.getFlightName(), selectedFlight.destination, numOfTickets, getFlightClass(flightClass), totalPrice));
+        vat = 0;
+        discount = 0;
     }
 
     private String getFlightClass(int flightClass) {
