@@ -26,9 +26,13 @@ public class ReservationSystem {
         double ECONOMY_MULTIPLIER = 1.0;
         double BUSINESS_MULTIPLIER = 1.25;
         double FIRST_CLASS_MULTIPLIER = 1.5;
+        double econDiscount = 0.1;
         switch(flightClass) {
             case 1:
                 totalPrice = selectedFlight.getPricePerTicket() * ECONOMY_MULTIPLIER * numOfTickets;
+                if (numOfTickets > 5) {
+                    totalPrice -= totalPrice * econDiscount; // Apply 10% discount for economy class if more than 5 tickets
+                }
                 break;
             case 2:
                 totalPrice = selectedFlight.getPricePerTicket() * BUSINESS_MULTIPLIER * numOfTickets;
@@ -40,13 +44,30 @@ public class ReservationSystem {
         return totalPrice;
     }
 
-    public void printReceipt(int flightId, int numOfTickets, int flightClass) {
+    public void printReceipt(int flightId, int numOfTickets, int flightClass, int paymentMethod) {
         Flight selectedFlight = availableFlights[flightId - 1];
         double totalPrice = calculateTotalPrice(flightId, numOfTickets, flightClass);
         System.out.println("\n=== RECEIPT ===");
         System.out.println("Flight: " + selectedFlight.getFlightDetails());
         System.out.println("Number of Tickets: " + numOfTickets);
         System.out.println("Total Price: $" + totalPrice);
+        System.out.println("Payment Method: " + getPaymentMethod(paymentMethod));
+    }
+
+    private String getPaymentMethod(int paymentMethod) {
+        String method = "";
+        switch (paymentMethod) {
+            case 1:
+                method = "Cash";
+                break;
+            case 2:
+                method = "Bank Transfer";
+                break;
+            case 3:
+                method = "eWallet";
+                break;
+        }
+        return method;
     }
 
     public void displayAvailableClasses() {
@@ -54,5 +75,12 @@ public class ReservationSystem {
         System.out.println("1. Economy Class");
         System.out.println("2. Business Class");
         System.out.println("3. First Class");
+    }
+
+    public void displayAvailablePaymentMethods() {
+        System.out.println("\nAvailable Payment Methods:");
+        System.out.println("1. Cash");
+        System.out.println("2. Bank Transfer");
+        System.out.println("3. eWallet");
     }
 }

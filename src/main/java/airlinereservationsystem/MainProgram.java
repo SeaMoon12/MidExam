@@ -27,8 +27,14 @@ public class MainProgram {
         System.out.print("How many tickets do you want to book? ");
         int numOfTickets = scanner.nextInt();
 
+        reservationSystem.displayAvailablePaymentMethods();
+
+        // Choose payment method
+        System.out.print("Select a payment method (Enter payment ID): ");
+        int paymentMethod = scanner.nextInt();
+
         // Display receipt
-        reservationSystem.printReceipt(flightId, numOfTickets, flightClass);
+        reservationSystem.printReceipt(flightId, numOfTickets, flightClass, paymentMethod);
 
         scanner.close();
     }
