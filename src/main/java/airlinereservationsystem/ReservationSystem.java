@@ -1,7 +1,10 @@
 package airlinereservationsystem;
 
+import java.util.ArrayList;
+
 public class ReservationSystem {
     private Flight[] availableFlights;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public ReservationSystem() {
         availableFlights = new Flight[] {
@@ -44,7 +47,7 @@ public class ReservationSystem {
         return totalPrice;
     }
 
-    public void printReceipt(int flightId, int numOfTickets, int flightClass, int paymentMethod) {
+    public void printReceipt(int flightId, int numOfTickets, int flightClass, int paymentMethod, String name) {
         Flight selectedFlight = availableFlights[flightId - 1];
         double totalPrice = calculateTotalPrice(flightId, numOfTickets, flightClass);
         System.out.println("\n=== RECEIPT ===");
@@ -52,6 +55,19 @@ public class ReservationSystem {
         System.out.println("Number of Tickets: " + numOfTickets);
         System.out.println("Total Price: $" + totalPrice);
         System.out.println("Payment Method: " + getPaymentMethod(paymentMethod));
+        transactions.add(new Transaction(name, selectedFlight.getFlightName(), selectedFlight.destination, numOfTickets, getFlightClass(flightClass), (int) totalPrice));
+    }
+
+    private String getFlightClass(int flightClass) {
+        switch(flightClass) {
+            case 1:
+                return "Economy Class";
+            case 2:
+                return "Business Class";
+            case 3:
+                return "First Class";
+        }
+        return "";
     }
 
     private String getPaymentMethod(int paymentMethod) {
@@ -90,5 +106,11 @@ public class ReservationSystem {
             numOfFlights++;
         }
         return numOfFlights;
+    }
+
+    public void displayTransactionHistory() {
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction.displayTransaction());
+        }
     }
 }

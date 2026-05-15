@@ -42,7 +42,19 @@ public class MainProgram {
         int paymentMethod = scanner.nextInt();
 
         // Display receipt
-        reservationSystem.printReceipt(flightId, numOfTickets, flightClass, paymentMethod);
+        reservationSystem.printReceipt(flightId, numOfTickets, flightClass, paymentMethod, name);
+
+        // Display transaction History
+        System.out.println("\nDo you want to view your transaction history? (yes/no)");
+        scanner.nextLine();
+        char viewHistory = scanner.next().charAt(0);
+        if (viewHistory == 'y') {
+            reservationSystem.displayTransactionHistory();
+        } else if (viewHistory == 'n') {
+        } else {
+            System.out.println("Invalid input. Program terminated.");
+            System.exit(0);
+        }
 
         // Display Thank you
         System.out.println("Thank you for booking. Have a nice flight, " + name);
