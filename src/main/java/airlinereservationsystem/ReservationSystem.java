@@ -83,4 +83,12 @@ public class ReservationSystem {
         System.out.println("2. Bank Transfer");
         System.out.println("3. eWallet");
     }
+
+    public int getNumOfFlights() {
+        int numOfFlights = 0;
+        for (Flight flight : availableFlights) {
+            numOfFlights++;
+        }
+        return numOfFlights;
+    }
 }

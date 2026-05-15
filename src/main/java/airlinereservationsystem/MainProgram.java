@@ -17,6 +17,11 @@ public class MainProgram {
         System.out.print("Select a flight (Enter flight ID): ");
         int flightId = scanner.nextInt();
 
+        if (flightId < 1 || flightId > reservationSystem.getNumOfFlights()) {
+            System.out.println("Invalid airline ID. Program terminated.");
+            System.exit(0); // https://stackoverflow.com/questions/22452930/terminating-a-java-program
+        }
+
         reservationSystem.displayAvailableClasses();
 
         // Choose class
