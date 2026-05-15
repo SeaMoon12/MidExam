@@ -17,12 +17,18 @@ public class MainProgram {
         System.out.print("Select a flight (Enter flight ID): ");
         int flightId = scanner.nextInt();
 
+        reservationSystem.displayAvailableClasses();
+
+        // Choose class
+        System.out.print("Select a flight class (Enter class ID): ");
+        int flightClass = scanner.nextInt();
+
         // Input number of tickets
         System.out.print("How many tickets do you want to book? ");
         int numOfTickets = scanner.nextInt();
 
         // Display receipt
-        reservationSystem.printReceipt(flightId, numOfTickets);
+        reservationSystem.printReceipt(flightId, numOfTickets, flightClass);
 
         scanner.close();
     }
