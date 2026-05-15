@@ -18,11 +18,6 @@ public class Transaction {
     }
 
     public String displayTransaction() {
-        return "Name: " + name + "\n" +
-                "Airline: " + airline + "\n" +
-                "Destination: " + destination + "\n" +
-                "Ticket Quantity: " + ticketQuantity + "\n" +
-                "Flight Class: " + flightClass + "\n" +
-                "Total Payment: " + totalPayment + "\n";
+        return name + "\t" + airline + "\t" + destination + "        \t\t" + ticketQuantity + "\t\t\t" + flightClass + "\t\t" + totalPayment;
     }
 }

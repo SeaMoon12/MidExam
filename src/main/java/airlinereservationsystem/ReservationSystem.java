@@ -110,6 +110,7 @@ public class ReservationSystem {
 
     public void displayTransactionHistory() {
         for (Transaction transaction : transactions) {
+            System.out.println("Name\tairline\t\tdestination\t\tticket quantity\t\tFlight Class\tTotal Payment");
             System.out.println(transaction.displayTransaction());
         }
     }
