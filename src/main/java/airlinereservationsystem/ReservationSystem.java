@@ -8,7 +8,7 @@ public class ReservationSystem {
                 new Flight(1, "Flight A", "New York", "Los Angeles", 200),
                 new Flight(2, "Flight B", "Chicago", "San Francisco", 250),
                 new Flight(3, "Flight C", "Miami", "Houston", 180),
-                new Flight(4, "Flight D", "Seattle", "Dallas", 220),
+                new Flight(4, "Flight D", "Seattle", "Dallas", 220)
         };
     }
 
